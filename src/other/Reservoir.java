@@ -76,32 +76,48 @@ public class Reservoir {
 
     public static int water1(int []arr)
     {
-        int water=0;
         //water 用于保存最大存水量
-        if(arr==null||arr.length<=1)
-            return 0;
+        int water=0;
+
         //如果只有一根柱子围不住水。
-        int leftLargest=0,rightLargest=0;
-        //leftLargest,rightLargest 分别用于保存遍过程中，当前元素左边最大值，和右边最大值。
-        for(int i=0;i<arr.length;i++)
-        {
-            leftLargest=0;
-            rightLargest=0;
-            for(int j=0;j<i;j++)
-                leftLargest=Math.max(leftLargest,arr[j]);
-            //先求出当前元素左边最大值。
-            for(int j=arr.length-1;j>i;j--)
-                rightLargest=Math.max(rightLargest, arr[j]);
-            //最求出当前元素右边最大值
-            water+=Math.min(leftLargest, rightLargest)>arr[i]?Math.min(leftLargest, rightLargest)-arr[i]:0;
-//左边最大值和右边最大值的最小值与当前元素比较如果小于当前元素，则当前元素上水量为0，围不住水，如果大于当前元素，则减去当前元素得到存水量。
+        if(arr==null||arr.length<=1) {
+            return 0;
         }
+        //left 保存每个元素左边的最大值
+        int[] left = new int[arr.length];
+        //right 保存每个元素右边的最大值
+        int[] right = new int[arr.length];
+
+        int leftLargest=0,rightLargest=0;
+
+        // 找出所有元素左边的最大值
+        for(int i=0;i<arr.length;i++) {
+            leftLargest=Math.max(leftLargest,arr[i]);
+            left[i]=leftLargest;
+        }
+
+        // 找出所有元素右边的最大值
+        for(int i=arr.length-1;i>=0;i--) {
+            rightLargest=Math.max(rightLargest,arr[i]);
+            right[i] = rightLargest;
+        }
+
+        for(int i=0;i<arr.length;i++){
+
+            // 左右两边更小的那个值决定了高度
+            int min=Math.min(left[i],right[i]);
+
+            if(min>arr[i]){
+                water+=min-arr[i];
+            }
+        }
+
         return water;
     }
 
 
     public static void main(String[] args) {
         int a[] = {5, 2, 1, 6, 3, 4, 2};
-        System.out.println(water(a,0,a.length-1,0));
+        System.out.println(water1(a));
     }
 }
