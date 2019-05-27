@@ -19,17 +19,24 @@ package leetcode338;
 public class Solution {
 
     public int[] countBits(int num) {
+        if(num==0)
+            return new int[]{0};
         int[] result=new int[num+1];
-        for(int i=1;i<num;i++){
+        for(int i=1;i<=num;i++){
             // 奇数
             if((i&1)==1){
                 result[i]=result[i-1]+1;
             }
             // 偶数
             else{
-
+                result[i]=result[i/2];
             }
         }
         return result;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        solution.countBits(2);
     }
 }
