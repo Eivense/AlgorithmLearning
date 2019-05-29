@@ -26,19 +26,45 @@ public class Solution {
     public int minFallingPathSum(int[][] A) {
 
         // 行
-        int n=A.length;
+        int row=A.length;
         // 列
-        int m=A[0].length;
+        int col=A[0].length;
 
-        int path[][] = new int[n][m];
-        int min=Integer.MAX_VALUE;
+        int path[][] = new int[row][col];
 
-        for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
-                path[i][j]=A[i][j];
+        // 设置第一行 就是原始数据的第一行
+        for(int i=0;i<col;i++){
+            path[0][i]=A[0][i];
+        }
+
+        // 从第二行开始往下走
+        for(int i=1;i<row;i++){
+            for(int j=0;j<col;j++){
+                // 第一列
+                if(j==0){
+                    path[i][j] = A[i][j] + Math.min(path[i - 1][j], path[i - 1][j + 1]);
+                }
+                else{
+                    // 最后一列
+                    if(j==col-1){
+                        path[i][j]=A[i][j]+Math.min(path[i-1][j-1],path[i-1][j]);
+                    }else{
+                        path[i][j]=A[i][j]+Math.min(Math.min(path[i-1][j-1],path[i-1][j]),path[i-1][j+1]);
+                    }
+                }
             }
         }
 
-        return min;
+        int min=Integer.MAX_VALUE;
+        for(int i=0;i<col;i++){
+            min=Math.min(min,path[row-1][i]);
+        }
+       return min;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        int a[][]=new int[][]{{-19,57},{-40,-5}};
+        solution.minFallingPathSum(a);
     }
 }
