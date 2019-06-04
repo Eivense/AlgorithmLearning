@@ -34,6 +34,27 @@ package leetcode547;
  */
 public class Solution {
     public int findCircleNum(int[][] M) {
+        int n=M.length;
 
+        int[] visited = new int[n];
+
+        int circle=0;
+
+        for(int i=0;i<n;i++){
+            if(visited[i]==0){
+                dfs(M,i,visited);
+                circle++;
+            }
+        }
+        return circle;
+    }
+
+    public void dfs(int [][]M,int k,int[]visited){
+        for (int i = 0; i < M.length; i++) {
+            if(M[k][i]==1&&visited[i]==0){
+                visited[i]=1;
+                dfs(M, i, visited);
+            }
+        }
     }
 }
