@@ -50,9 +50,11 @@ public class Solution {
     }
 
     public void dfs(int [][]M,int k,int[]visited){
+
+        visited[k]=1;
+
         for (int i = 0; i < M.length; i++) {
             if(M[k][i]==1&&visited[i]==0){
-                visited[i]=1;
                 dfs(M, i, visited);
             }
         }
