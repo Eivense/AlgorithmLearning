@@ -11,6 +11,9 @@ import java.util.concurrent.CountDownLatch;
  * 请设计修改程序，以确保 two() 方法在 one() 方法之后被执行，three() 方法在 two() 方法之后被执行。
  *
  *
+ *
+ * 通过CountDownLatch实现
+ *
  */
 class Foo {
 
