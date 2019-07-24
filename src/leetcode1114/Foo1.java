@@ -42,6 +42,7 @@ public class Foo1 {
         printSecond.run();
         second=true;
         condition2.signal();
+        first=false;
         lock.unlock();
     }
 
@@ -52,6 +53,7 @@ public class Foo1 {
             condition2.await();
         }
         printThird.run();
+        second=false;
         lock.unlock();
     }
 }
