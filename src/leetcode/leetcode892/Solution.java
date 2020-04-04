@@ -42,9 +42,27 @@ package leetcode.leetcode892;
 public class Solution {
 
     public int surfaceArea(int[][] grid) {
-        int i = grid.length;
-        int j = grid[0].length;
+        int n = grid.length;
 
+        int result = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                int num = grid[i][j];
+                result += num * 6;
+                // 堆叠 每多一个则少两个面
+                if (num > 1) {
+                    result -= 2 * (num - 1);
+                }
+                // 矮的
+                if(i>=1){
+                    result -= Math.min(grid[i - 1][j], num) * 2;
+                }
+                if(j>=1){
+                    result -= Math.min(grid[i][j - 1], num) * 2;
+                }
+            }
+        }
 
+        return result;
     }
 }
