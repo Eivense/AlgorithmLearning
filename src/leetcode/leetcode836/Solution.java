@@ -1,6 +1,5 @@
 package leetcode.leetcode836;
 
-import javafx.util.Pair;
 
 /**
  * 836. 矩形重叠
