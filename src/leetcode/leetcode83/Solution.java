@@ -17,14 +17,6 @@ package leetcode.leetcode83;
  *
  *
  */
-class ListNode {
-    int val;
-    ListNode next;
-
-    ListNode(int x) {
-        val = x;
-    }
-}
 
 public class Solution {
     public ListNode deleteDuplicates2(ListNode head) {

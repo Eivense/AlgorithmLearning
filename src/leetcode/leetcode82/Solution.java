@@ -12,31 +12,33 @@ package leetcode.leetcode82;
  *
  *
  */
-class ListNode {
-      int val;
-      ListNode next;
-      ListNode(int x) { val = x; }
-  }
 public class Solution {
     public ListNode deleteDuplicates(ListNode head) {
         if(head==null)
             return null;
-        ListNode temp=new ListNode(0);
-        temp.next=head;
-
+        ListNode temp=new ListNode(0,head);
         ListNode result=temp;
-
         while(temp.next!=null){
             ListNode current=temp.next;
             while(current.next!=null&&current.val==current.next.val){
                 current=current.next;
             }
+            // 是否和当前节点是同一节点
             if(current!=temp.next)
+                // 不相等说明中间有相同的节点
                 temp.next=current.next;
             else
                 temp=temp.next;
         }
-        return head;
+        return result.next;
+    }
+
+    public static void main(String[] args) {
+
+        ListNode head = new ListNode(1, new ListNode(1, new ListNode(1, new ListNode(2, new ListNode(3)))));
+        Solution solution = new Solution();
+
+        solution.deleteDuplicates(head);
     }
 
 }
