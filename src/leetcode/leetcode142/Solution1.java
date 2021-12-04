@@ -15,7 +15,7 @@ public class Solution1 {
         ListNode temp = head;
 
         ListNode slow = head;
-        ListNode fast = head.next;
+        ListNode fast = head;
         // 循环结束即没有环
         while (fast != null && fast.next != null) {
             // 步长为1
@@ -28,9 +28,10 @@ public class Solution1 {
                     temp=temp.next;
                     slow = slow.next;
                 }
+                return temp;
             }
         }
-        return temp;
+        return null;
     }
 
     public static void main(String[] args) {

@@ -1,6 +1,7 @@
 package leetcode.leetcode155;
 
 import java.util.ArrayDeque;
+import java.util.Stack;
 
 /**
  * 155. 最小栈
@@ -25,48 +26,29 @@ import java.util.ArrayDeque;
  */
 public class MinStack {
 
+    private Stack<int[]> stack1;
 
-    ArrayDeque<Integer> data;
-    ArrayDeque<Integer> min;
-
-    /** initialize your data structure here. */
     public MinStack() {
-        data = new ArrayDeque<>();
-        min = new ArrayDeque<>();
+        stack1 = new Stack<>();
     }
 
-    public void push(int x) {
-        data.push(x);
-        if (min.isEmpty() || min.peek() >=x) {
-            min.push(x);
+    public void push(int val) {
+        if (stack1.isEmpty()) {
+            stack1.push(new int[]{val, val});
+        }else{
+            stack1.push(new int[]{val, Math.min(val, stack1.peek()[1])});
         }
     }
 
     public void pop() {
-        int top = data.pop();
-        if (top== min.peek()) {
-            min.pop();
-        }
+        stack1.pop();
     }
 
     public int top() {
-        return data.peek();
+        return stack1.peek()[0];
     }
 
     public int getMin() {
-        return min.peek();
-    }
-
-
-    public static void main(String[] args) {
-        MinStack minStack = new MinStack();
-        minStack.push(-2);
-        minStack.push(0);
-        minStack.push(-1);
-
-        System.out.println(minStack.getMin());
-        System.out.println(minStack.top());
-        minStack.pop();
-        System.out.println(minStack.getMin());
+        return stack1.peek()[1];
     }
 }

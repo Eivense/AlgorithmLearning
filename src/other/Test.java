@@ -1,11 +1,17 @@
 package other;
 
 
-class A  {
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantLock;
+
+class A {
     int a = 0;
 
-    public A(int a){
-     this.a=a;
+    public A(int a) {
+        this.a = a;
     }
 
 //    @Override
@@ -13,19 +19,19 @@ class A  {
 //        return super.clone();
 //    }
 }
+
 public class Test {
 
-    public static void main(String[] args) throws Exception{
-        String s1 = "AB";
-        String s2 = new String("AB");
-        String s3 = "A";
-        String s4 = "B";
-        String s5 = "A" + "B";
-        String s6 = s3 + s4;
-        System.out.println(s1 == s2);
-        System.out.println(s1 == s5);
-        System.out.println(s1 == s6);
-        System.out.println(s1 == s6.intern());
-        System.out.println(s2 == s2.intern());
+    public static void main(String[] args) throws Exception {
+        String a = "java";
+
+        String b = new String("java");
+
+        String c = new StringBuilder().append("java").toString();
+
+        System.out.println(a == b.intern());
+        System.out.println(b == c);
+        System.out.println(a == c);
+
     }
 }

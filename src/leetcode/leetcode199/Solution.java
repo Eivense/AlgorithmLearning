@@ -30,25 +30,24 @@ class TreeNode {
 public class Solution {
     public List<Integer> rightSideView(TreeNode root) {
         Deque<TreeNode> queue = new ArrayDeque<>();
+        queue.add(root);
         List<Integer> result = new ArrayList<>();
-        if(root!=null){
-            queue.add(root);
-        }
-        while(!queue.isEmpty()){
-            int size=queue.size();
-            result.add(queue.peekLast().val);
-            while(size>0){
-                TreeNode node=queue.pop();
-                if(node.left!=null){
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.pop();
+                if (i == size - 1) {
+                    result.add(node.val);
+                }
+                if (node.left != null) {
                     queue.add(node.left);
                 }
                 if (node.right != null) {
                     queue.add(node.right);
                 }
-                size--;
             }
-
         }
         return result;
     }
+
 }
